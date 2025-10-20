@@ -2,12 +2,12 @@
 use std::net::SocketAddr;
 // crates.io
 use hap::{
-	accessory::{switch::SwitchAccessory, AccessoryInformation},
+	accessory::{AccessoryInformation, switch::SwitchAccessory},
 	characteristic::CharacteristicCallbacks,
 	server::{IpServer, Server},
 };
 use wakey::WolPacket;
-// x-majordomo
+// self
 use crate::prelude::*;
 
 struct Waker {

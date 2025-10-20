@@ -5,12 +5,12 @@ use std::{
 };
 // crates.io
 use hap::{
+	Config, MacAddress, Pin,
 	accessory::AccessoryCategory,
 	server::IpServer,
 	storage::{FileStorage, Storage},
-	Config, MacAddress, Pin,
 };
-// x-majordomo
+// self
 use crate::prelude::*;
 
 const HOST: IpAddr = IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0));

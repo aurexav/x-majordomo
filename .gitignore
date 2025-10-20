@@ -1,17 +1,20 @@
-# System
+# Integrated development environment.
+.vscode
+.zed
+
+# Package manager.
+## Cargo.
+target
+## Python
+.venv
+__pycache__
+## NPM.
+node_modules
+
+# System.
 .DS_Store
 
-# Integrated development environment
-.idea
-.fleet
-.vscode
-
-# Package manager
-## Cargo
-target
-## mdBook
-book
-index.html
-
-# Test data
-nohup.out
+# Test data.
+*.bak
+.env
+tmp

@@ -4,8 +4,8 @@ use std::time::Duration;
 use hap::serde_json::{self, Value};
 use rumqttc::{AsyncClient, Event, Incoming, MqttOptions, QoS};
 use tokio::task;
-// x-majordomo
-use crate::{prelude::*, OneshotTx, Rx};
+// self
+use crate::{OneshotTx, Rx, prelude::*};
 
 pub async fn start(host: String, tx: OneshotTx, mut rx: Rx) -> Result<()> {
 	let mut mqtt_options = MqttOptions::new("rumqtt-async", host, 1883);

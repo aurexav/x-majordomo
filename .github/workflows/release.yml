@@ -1,5 +1,9 @@
 name: Release
 
+permissions:
+  contents: write
+  actions: write
+
 env:
   CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
   CARGO_TERM_COLOR: always
@@ -10,6 +14,10 @@ on:
   push:
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   build:
@@ -25,26 +33,32 @@ jobs:
           ]
     steps:
       - name: Fetch latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Setup Rust toolchain
         run: rustup target add ${{ matrix.target.name }}
+
       - name: Build
         run: cargo build --profile ci-release --locked --target ${{ matrix.target.name }}
+
       - name: Pack (macOS)
         if: matrix.target.os == 'macos-latest'
         run: |
           mv target/${{ matrix.target.name }}/ci-release/x-majordomo .
           zip x-majordomo-${{ matrix.target.name }}.zip x-majordomo
+
       - name: Pack (Windows)
         if: matrix.target.os == 'windows-latest'
         run: |
           mv target/${{ matrix.target.name }}/ci-release/x-majordomo.exe .
           Compress-Archive -Path x-majordomo.exe -DestinationPath x-majordomo-${{ matrix.target.name }}.zip
+
       - name: Pack (Linux)
         if: matrix.target.os == 'ubuntu-latest'
         run: |
           mv target/${{ matrix.target.name }}/ci-release/x-majordomo .
           tar -czvf x-majordomo-${{ matrix.target.name }}.tar.gz x-majordomo
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -58,7 +72,8 @@ jobs:
     needs: [build]
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
+
       - name: Hash
         run: |
           mkdir -p artifacts
@@ -68,10 +83,10 @@ jobs:
           md5sum * | tee ../MD5
           mv ../SHA256 .
           mv ../MD5 .
+
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
           discussion_category_name: Announcements
           generate_release_notes: true
           files: artifacts/*
-

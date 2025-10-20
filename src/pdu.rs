@@ -5,16 +5,16 @@ mod mqtt;
 use std::future::Future;
 // crates.io
 use ::hap::{
+	HapType,
 	accessory::AccessoryInformation,
 	server::{IpServer, Server},
 	service::{accessory_information::AccessoryInformationService, switch::SwitchService},
-	HapType,
 };
 use tokio::{
 	sync::{mpsc, oneshot},
 	task,
 };
-// x-majordomo
+// self
 use crate::prelude::*;
 
 #[derive(Debug)]

@@ -2,6 +2,10 @@
 
 #![deny(clippy::all, missing_docs, unused_crate_dependencies)]
 
+mod pdu;
+mod util;
+mod waker;
+
 mod prelude {
 	pub use std::result::Result as StdResult;
 
@@ -30,17 +34,13 @@ mod prelude {
 }
 use prelude::*;
 
-mod pdu;
-mod util;
-mod waker;
-
 // crates.io
 use clap::{
-	builder::{
-		styling::{AnsiColor, Effects},
-		Styles,
-	},
 	Parser,
+	builder::{
+		Styles,
+		styling::{AnsiColor, Effects},
+	},
 };
 use hap::server::Server;
 use tracing_subscriber::fmt;

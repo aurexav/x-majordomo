@@ -1,13 +1,13 @@
 // crates.io
 use hap::{
+	HapType,
 	accessory::HapAccessory,
 	characteristic::AsyncCharacteristicCallbacks,
 	futures::FutureExt,
-	service::{switch::SwitchService, HapService},
-	HapType,
+	service::{HapService, switch::SwitchService},
 };
-use serde::{ser::SerializeStruct, Serialize, Serializer};
-// x-majordomo
+use serde::{Serialize, Serializer, ser::SerializeStruct};
+// self
 use crate::{pdu::Pdu, prelude::*};
 
 impl Pdu {

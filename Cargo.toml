@@ -2,13 +2,13 @@
 authors     = ["Xavier Lau <xavier@inv.cafe>"]
 build       = "build.rs"
 description = "HAP & MQTT smart majordomo implementation."
-edition     = "2021"
-homepage    = "https://inv.cafe/code/x-majordomo"
+edition     = "2024"
+homepage    = "https://github.com/aurexav/x-majordomo"
 license     = "GPL-3.0"
 name        = "x-majordomo"
 readme      = "README.md"
-repository  = "https://github.com/inv-cafe/x-majordomo"
-version     = "0.4.0"
+repository  = "https://github.com/aurexav/x-majordomo"
+version     = "0.5.0"
 
 [profile.ci-dev]
 incremental = false
@@ -26,10 +26,10 @@ vergen-gitcl = { version = "1.0", features = ["cargo"] }
 # crates.io
 anyhow             = { version = "1.0" }
 clap               = { version = "4.5", features = ["derive"] }
-hap                = { version = "0.1.0-pre.15", git = "https://github.com/AurevoirXavier/hap-rs" }
-rumqttc            = { version = "0.24" }
+hap                = { version = "0.1.0-pre.15", git = "https://github.com/aurexav/hap-rs" }
+rumqttc            = { version = "0.25" }
 serde              = { version = "1.0" }
-tokio              = { version = "1.41", features = ["macros", "rt-multi-thread", "time"] }
+tokio              = { version = "1.48", features = ["macros", "rt-multi-thread", "time"] }
 tracing            = { version = "0.1" }
 tracing-subscriber = { version = "0.3" }
 wakey              = { version = "0.3" }
